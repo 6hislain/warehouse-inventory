@@ -2,7 +2,7 @@
 
 A (minimal viable product) project for managing stock in a warehouse
 
-![Screenshot](screenshot.png)
+![Screenshot](public/img/screenshot.png)
 
 ### Requirements
 
