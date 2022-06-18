@@ -1,0 +1,6 @@
+@import url("./bulma.css");
+
+html,
+body {
+	min-height: 100vh;
+}
