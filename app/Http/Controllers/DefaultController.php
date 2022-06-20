@@ -27,18 +27,18 @@ class DefaultController extends Controller
 
 	public function dashboard()
 	{
-		$productCount = Product::count();
-		$categoryCount = Category::count();
-		$stockInCount = Transaction::where("type", "stock in")->count();
-		$stockOutCount = Transaction::where("type", "stock out")->count();
+		$product_count = Product::count();
+		$category_count = Category::count();
+		$stock_in_count = Transaction::where("type", "stock in")->count();
+		$stock_out_count = Transaction::where("type", "stock out")->count();
 
 		return view(
 			"dashboard",
 			compact([
-				"productCount",
-				"categoryCount",
-				"stockInCount",
-				"stockOutCount",
+				"product_count",
+				"category_count",
+				"stock_in_count",
+				"stock_out_count",
 			])
 		);
 	}

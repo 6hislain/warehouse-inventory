@@ -13,18 +13,26 @@
 		  <thead>
 		    <tr>
 		      <th>ID</th>
-		      <th>Name</th>
+		      <th style='width: 20%'>Product</th>
 		      <th>Description</th>
 		      <th>Created by</th>
 		      <th>Action</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach ($transactions as $transaction)
+		  	@foreach ($transactions as $key => $transaction)
 		    <tr>
-		      <td>{{ $transaction->id }}</td>
-		      <td>{{ $transaction->name }}</td>
-		      <td>{{ $transaction->description }}</td>
+		      <td>{{ $key + 1 }}</td>
+		      <td>
+		      	{{ $transaction->product->name }}
+		      	<img src="/storage/{{ substr($transaction->product->image, 6) }}" alt="{{ $transaction->product->name }}" class='is-fullwidth'>
+		      	{{ $transaction->product->buying_price }} ~
+		      	{{ $transaction->product->selling_price }} <span class="is-uppercase">{{ $transaction->product->currency }}</span>
+		      </td>
+		      <td>
+		      	Quantity: {{ $transaction->quantity }} <br> Total: {{ $transaction->total }} <hr class='my-1'>
+		      	{{ $transaction->description }}
+		      </td>
 		      <td><small>{{ $transaction->user->name }} <br> {{ $transaction->created_at }}</small></td>
 		      <td>
 		      	<a href="{{ route('transaction.show', $transaction->id) }}" class="button is-info is-small">View</a>

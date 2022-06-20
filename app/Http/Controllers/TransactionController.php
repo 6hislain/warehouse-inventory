@@ -39,14 +39,28 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => ["required", "min:3", "max:100", "unique:users"],
+            "type" => ["required", "in:stock in,stock out,expired"],
+            "product_id" => ["required"],
             "description" => ["required", "min:3"],
+            "quantity" => ["required", "numeric"],
         ]);
 
+        $product = Product::findOrFail($request->product_id);
+
+        if ($request->type == "stock out") {
+            $unit_price = $product->selling_price;
+        } else {
+            $unit_price = $product->buying_price;
+        }
+
         Transaction::create([
-            "name" => $request->name,
+            "type" => $request->type,
+            "quantity" => $request->quantity,
+            "product_id" => $request->product_id,
             "description" => $request->description,
             "user_id" => auth()->user()->id,
+            "unit_price" => $unit_price,
+            "total" => $request->quantity * $unit_price,
         ]);
 
         return redirect()->route("transaction.index");
@@ -55,7 +69,9 @@ class TransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         $request->validate([
-            "name" => ["required", "min:3", "max:100", "unique:users"],
+            "quantity" => ["required", "numeric"],
+            "type" => ["required", "in:stock in,stock out,expired"],
+            "product_id" => ["required"],
             "description" => ["required", "min:3"],
         ]);
 
