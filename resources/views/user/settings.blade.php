@@ -21,7 +21,7 @@
       <div class="column is-4">
         <label class="label">Email</label>
         <div class="control">
-          <input class="input @error('email') is-danger @enderror" type="email" name="email" value="{{ auth()->user()->email }}">
+          <input class="input @error('email') is-danger @enderror" type="email" name="email" readonly placeholder="{{ auth()->user()->email }}">
         </div>
          <p class="help is-danger">@error('email') {{ $message }} @enderror</p>
       </div>
@@ -45,7 +45,7 @@
       <div class="column is-12">
         <label class="label">Bio</label>
         <div class="control">
-          <textarea name="bio" rows="4" class="textarea @error('bio') is-danger @enderror">{{ old('bio') }}</textarea>
+          <textarea name="bio" rows="4" class="textarea @error('bio') is-danger @enderror">{{ auth()->user()->bio }}</textarea>
         </div>
         <p class="help is-danger">@error('bio') {{ $message }} @enderror</p>
       </div>

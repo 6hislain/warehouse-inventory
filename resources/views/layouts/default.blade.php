@@ -40,14 +40,14 @@
               Contact
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="https://warehouse1nventory.herokuapp.com">
+              <a class="navbar-item" target='_blank' href="https://warehouse1nventory.herokuapp.com">
                 Demo
               </a>
-              <a class="navbar-item" href="https://github.com/6hislain/warehouse-inventory">
+              <a class="navbar-item" target='_blank' href="https://github.com/6hislain/warehouse-inventory">
                 GitHub
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item" href="https://bio.link/6hislain">
+              <a class="navbar-item" target='_blank' href="https://bio.link/6hislain">
                 Author
               </a>
             </div>

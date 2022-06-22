@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("guest")->except(["settings", "logout"]);
+        $this->middleware("guest")->except(["settings", "update", "logout"]);
     }
 
     public function authenticate(Request $request)
@@ -74,6 +75,24 @@ class UserController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended("dashboard");
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate(["name" => ["required", "min:3"]]);
+
+        if (!empty($request->file("image"))) {
+            if ($user->image) {
+                Storage::delete($user->image);
+            }
+            $user->image = $request->file("image")->store("public/profile");
+        }
+
+        $user->name = $request->name;
+        $user->bio = $request->bio;
+        $user->save();
+
+        return redirect()->route("dashboard");
     }
 
     public function settings()
