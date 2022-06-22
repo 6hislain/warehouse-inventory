@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("guest")->except("logout");
+        $this->middleware("guest")->except(["settings", "logout"]);
     }
 
     public function authenticate(Request $request)
@@ -45,12 +45,12 @@ class UserController extends Controller
 
     public function login()
     {
-        return view("auth.login");
+        return view("user.login");
     }
 
     public function register()
     {
-        return view("auth.register");
+        return view("user.register");
     }
 
     public function save(Request $request)
@@ -74,5 +74,10 @@ class UserController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended("dashboard");
+    }
+
+    public function settings()
+    {
+        return view("user.settings");
     }
 }

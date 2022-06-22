@@ -21,6 +21,7 @@ use App\Http\Controllers\TransactionController;
 Route::controller(DefaultController::class)->group(function () {
     Route::get("/", "index")->name("home");
     Route::get("/about", "about")->name("about");
+    Route::get("/stats", "stats")->name("stats");
     Route::get("/dashboard", "dashboard")->name("dashboard");
 });
 
@@ -99,11 +100,9 @@ Route::controller(UserController::class)->group(function () {
         ->whereNumber("user")
         ->name("user.show");
 
-    Route::get("/user/{user}/edit", "edit")
-        ->whereNumber("user")
-        ->name("user.edit");
-
     Route::put("/user/{user}", "update")
         ->whereNumber("user")
         ->name("user.update");
+
+    Route::get("/settings", "settings")->name("settings");
 });

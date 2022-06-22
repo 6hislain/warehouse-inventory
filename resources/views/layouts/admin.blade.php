@@ -12,7 +12,7 @@
 			<div class="columns is-multiline is-centered">
 				<div class="column is-2">
 					<div class="box">
-						<h5 class='has-text-weight-bold has-text-centered mb-2 is-size-5'>{{ auth()->user()->name }}</h5>
+						<h6 class='has-text-weight-bold has-text-centered mb-2 is-size-6'>{{ auth()->user()->name }}</h6>
 						<aside class="menu">
 						  <p class="menu-label">
 						    General
@@ -41,7 +41,9 @@
 						    More
 						  </p>
 						  <ul class="menu-list">
-						    <li><a href="{{ route('user.edit', auth()->user()->id) }}">Settings</a></li>
+						    <li>
+                                <a href="{{ route('settings') }}" class='@if (app()->view->getSections()["title"] == "Settings") is-active @endif'>Settings</a>
+                            </li>
 						    <li><a href="{{ route('user.show', auth()->user()->id) }}">User profile</a></li>
 						    <li><a href='{{ route("logout") }}'>Log out</a></li>
 						  </ul>

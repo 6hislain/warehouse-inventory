@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 
@@ -12,13 +12,15 @@
 	</div>
 	<div class="column is-3">
 		<div class="box">
-			<h1 class='is-size-1'>{{ $stock_in_count }}</h1>
+			<h6 class='is-size-6'>Total: {{ $stock_in_total }}</h6>
+			<h3 class='is-size-3'>{{ $stock_in_count }}</h3>
 			<a href="{{ route('transaction.index') }}">Stock in &rarr;</a>
 		</div>
 	</div>
 	<div class="column is-3">
 		<div class="box">
-			<h1 class='is-size-1'>{{ $stock_out_count }}</h1>
+			<h6 class='is-size-6'>Total: {{ $stock_out_total }}</h6>
+			<h3 class='is-size-3'>{{ $stock_out_count }}</h3>
 			<a href="{{ route('transaction.index') }}">Stock out &rarr;</a>
 		</div>
 	</div>

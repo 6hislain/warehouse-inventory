@@ -16,21 +16,24 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::simplePaginate(8);
+        $products = Product::where(
+            "user_id",
+            auth()->user()->id
+        )->simplePaginate(8);
 
         return view("product.index", compact("products"));
     }
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::all()->where("user_id", auth()->user()->id);
 
         return view("product.create", compact("categories"));
     }
 
     public function edit(Product $product)
     {
-        $categories = Category::all();
+        $categories = Category::all()->where("user_id", auth()->user()->id);
 
         return view("product.edit", compact(["product", "categories"]));
     }

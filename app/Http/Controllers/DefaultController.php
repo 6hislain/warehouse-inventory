@@ -27,10 +27,28 @@ class DefaultController extends Controller
 
 	public function dashboard()
 	{
-		$product_count = Product::count();
-		$category_count = Category::count();
-		$stock_in_count = Transaction::where("type", "stock in")->count();
-		$stock_out_count = Transaction::where("type", "stock out")->count();
+		$product_count = Product::where("user_id", auth()->user()->id)->count();
+		$category_count = Category::where("user_id", auth()->user()->id)->count();
+
+		$stock_in_count = Transaction::where([
+			["user_id", auth()->user()->id],
+			["type", "stock in"],
+		])->count();
+
+		$stock_out_count = Transaction::where([
+			["user_id", auth()->user()->id],
+			["type", "stock out"],
+		])->count();
+
+		$stock_in_total = Transaction::where([
+			["user_id", auth()->user()->id],
+			["type", "stock in"],
+		])->sum("total");
+
+		$stock_out_total = Transaction::where([
+			["user_id", auth()->user()->id],
+			["type", "stock out"],
+		])->sum("total");
 
 		return view(
 			"dashboard",
@@ -38,7 +56,9 @@ class DefaultController extends Controller
 				"product_count",
 				"category_count",
 				"stock_in_count",
+				"stock_in_total",
 				"stock_out_count",
+				"stock_out_total",
 			])
 		);
 	}

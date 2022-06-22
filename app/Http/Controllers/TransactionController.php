@@ -15,14 +15,16 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::with("product")->simplePaginate(10);
+        $transactions = Transaction::where("user_id", auth()->user()->id)
+            ->with("product")
+            ->simplePaginate(10);
 
         return view("transaction.index", compact("transactions"));
     }
 
     public function create()
     {
-        $products = Product::all();
+        $products = Product::all()->where("user_id", auth()->user()->id);
 
         return view("transaction.create", compact("products"));
     }
