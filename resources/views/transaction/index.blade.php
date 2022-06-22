@@ -13,9 +13,10 @@
 		  <thead>
 		    <tr>
 		      <th>ID</th>
-		      <th style='width: 20%'>Product</th>
+		      <th>Product</th>
+		      <th>Quantity, Price, Total</th>
 		      <th>Description</th>
-		      <th>Created by</th>
+		      <th>Transaction Type</th>
 		      <th>Action</th>
 		    </tr>
 		  </thead>
@@ -24,19 +25,15 @@
 		    <tr>
 		      <td>{{ $key + 1 }}</td>
 		      <td>
-		      	{{ $transaction->product->name }}
-		      	<img src="/storage/{{ substr($transaction->product->image, 6) }}" alt="{{ $transaction->product->name }}" class='is-fullwidth'>
-		      	{{ $transaction->product->buying_price }} ~
-		      	{{ $transaction->product->selling_price }} <span class="is-uppercase">{{ $transaction->product->currency }}</span>
+		      	<a href='{{ route('product.show', $transaction->product->id) }}' target='_blank'>{{ $transaction->product->name }}</a>
 		      </td>
-		      <td>
-		      	Quantity: {{ $transaction->quantity }} <br> Total: {{ $transaction->total }} <hr class='my-1'>
-		      	{{ $transaction->description }}
-		      </td>
-		      <td><small>{{ $transaction->user->name }} <br> {{ $transaction->created_at }}</small></td>
+            <td>
+              {{ $transaction->quantity }} x {{ $transaction->unit_price }} = {{ $transaction->total }}
+            </td>
+          <td>{{ $transaction->description }}</td>
+		      <td>{{ $transaction->type }}</td>
 		      <td>
 		      	<a href="{{ route('transaction.show', $transaction->id) }}" class="button is-info is-small">View</a>
-		      	<a href="{{ route('transaction.edit', $transaction->id) }}" class="button is-warning is-small">Edit</a>
 		      	<form action="{{ route('transaction.destroy', $transaction->id) }}" method='post' class='is-inline'>
 		      		@method('delete')
 		      		@csrf

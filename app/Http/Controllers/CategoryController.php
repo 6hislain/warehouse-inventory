@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::with('user')->simplePaginate(20);
+        $categories = Category::with("user")->simplePaginate(20);
 
         return view("category.index", compact("categories"));
     }

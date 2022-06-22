@@ -83,14 +83,6 @@ Route::prefix("transaction")
             ->whereNumber("transaction")
             ->name("transaction.show");
 
-        Route::get("/{transaction}/edit", "edit")
-            ->whereNumber("transaction")
-            ->name("transaction.edit");
-
-        Route::put("/{transaction}", "update")
-            ->whereNumber("transaction")
-            ->name("transaction.update");
-
         Route::delete("/{transaction}", "destroy")
             ->whereNumber("transaction")
             ->name("transaction.destroy");

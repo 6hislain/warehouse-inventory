@@ -15,9 +15,7 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::with(["user", "product"])->simplePaginate(
-            10
-        );
+        $transactions = Transaction::with("product")->simplePaginate(10);
 
         return view("transaction.index", compact("transactions"));
     }
@@ -29,17 +27,10 @@ class TransactionController extends Controller
         return view("transaction.create", compact("products"));
     }
 
-    public function edit(Transaction $transaction)
-    {
-        $products = Product::all();
-
-        return view("transaction.edit", compact(["products", "transaction"]));
-    }
-
     public function store(Request $request)
     {
         $request->validate([
-            "type" => ["required", "in:stock in,stock out,expired"],
+            "type" => ["required", "in:stock in,stock out"],
             "product_id" => ["required"],
             "description" => ["required", "min:3"],
             "quantity" => ["required", "numeric"],
@@ -47,10 +38,23 @@ class TransactionController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        if ($request->type == "stock out") {
-            $unit_price = $product->selling_price;
-        } else {
+        if ($request->type == "stock in") {
             $unit_price = $product->buying_price;
+        } else {
+            $unit_price = $product->selling_price;
+            $available_quantity = Transaction::where(
+                "product_id",
+                $product->id
+            )->sum("quantity");
+
+            if ($available_quantity < $request->quantity) {
+                return back()
+                    ->withErrors([
+                        "quantity" =>
+                            'quantity too high, you can\'t take out more than what we have',
+                    ])
+                    ->onlyInput("quantity");
+            }
         }
 
         Transaction::create([
@@ -62,23 +66,6 @@ class TransactionController extends Controller
             "unit_price" => $unit_price,
             "total" => $request->quantity * $unit_price,
         ]);
-
-        return redirect()->route("transaction.index");
-    }
-
-    public function update(Request $request, Transaction $transaction)
-    {
-        $request->validate([
-            "quantity" => ["required", "numeric"],
-            "type" => ["required", "in:stock in,stock out,expired"],
-            "product_id" => ["required"],
-            "description" => ["required", "min:3"],
-        ]);
-
-        $transaction->name = $request->name;
-        $transaction->description = $request->description;
-        $transaction->user_id = auth()->user()->id;
-        $transaction->save();
 
         return redirect()->route("transaction.index");
     }

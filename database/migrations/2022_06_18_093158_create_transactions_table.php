@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create("transactions", function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger("quantity");
-            $table->enum("type", ["stock in", "stock out", "expired"]);
+            $table->enum("type", ["stock in", "stock out"]);
             $table->float("unit_price");
             $table->float("total");
             $table->text("description");

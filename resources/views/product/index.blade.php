@@ -3,50 +3,59 @@
 @section('title', 'All Products')
 
 @section('content')
-<div class="box">
-	<div class='is-flex is-flex-direction-row is-justify-content-space-between'>
-		<h5 class='has-text-weight-bold mb-2 is-size-5'>All Products</h5>
-		<a href="{{ route('product.create') }}" class="button is-primary is-small">New Product</a>
-	</div>
-	<div class="table-container">
-		<table class="table is-fullwidth is-bordered is-hoverable">
-		  <thead>
-		    <tr>
-		      <th>ID</th>
-		      <th style='width: 20%'>Name</th>
-		      <th>Details</th>
-		      <th>Created by</th>
-		      <th>Action</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	@foreach ($products as $key => $product)
-		    <tr>
-		      <td>{{ $key + 1 }}</td>
-		      <td>
-		      	{{ $product->name }}
-		      	<img src="/storage/{{ substr($product->image, 6) }}" alt="{{ $product->name }}" class='is-fullwidth'>
-		      </td>
-		      <td>
-		      	{{ $product->buying_price }} ~
-		      	{{ $product->selling_price }} <span class="is-uppercase">{{ $product->currency }}</span> <hr class='my-1'>
-		      	{{ $product->description }}
-		      </td>
-		      <td><small>{{ $product->user->name }} <br> {{ $product->created_at }}</small></td>
-		      <td>
-		      	<a href="{{ route('product.show', $product->id) }}" class="button is-info is-small">View</a>
-		      	<a href="{{ route('product.edit', $product->id) }}" class="button is-warning is-small">Edit</a>
-		      	<form action="{{ route('product.destroy', $product->id) }}" method='post' class='is-inline'>
-		      		@method('delete')
-		      		@csrf
-			      	<button type='submit' class="button is-danger is-small">Delete</button>
-			      </form>
-		      </td>
-		    </tr>
-		    @endforeach
-		  </tbody>
-		</table>
-	</div>
-	{{ $products->links() }}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item has-text-weight-bold" href="{{ route('product.index') }}">
+      All Products
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="button is-primary is-small" href="{{ route('product.create') }}">
+          New Product
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="columns is-multiline is-centered my-3">
+  @foreach ($products as $product)
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-3by2">
+          <img src="/storage/{{ substr($product->image, 6) }}" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="card-content p-3">
+        <p class='title is-6 my-1'>{{ $product->name }}</p>
+        <p class='subtitle is-6 my-1'>
+          {{ $product->buying_price }} ~ {{ $product->selling_price }}
+          <span class="is-uppercase">{{ $product->currency }}</span>
+        </p>
+        <p class='is-size-7 mt-1'>{{ $product->description }}</p>
+      </div>
+      <footer class="card-footer">
+        <a href="{{ route('product.show', $product->id) }}" class="card-footer-item">View</a>
+        <a href="{{ route('product.edit', $product->id) }}" class="card-footer-item">Edit</a>
+        <form action="{{ route('product.destroy', $product->id) }}" method='post' class='is-inline my-auto'>
+          @method('delete')
+          @csrf
+          <button type='submit' class="button is-ghost card-footer-item">Delete</button>
+        </form>
+      </footer>
+    </div>
+  </div>
+  @endforeach
 </div>
+
+{{ $products->links() }}
 @endsection

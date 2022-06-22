@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("guest")->except('logout');
+        $this->middleware("guest")->except("logout");
     }
 
     public function authenticate(Request $request)
@@ -40,7 +40,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route("home");
     }
 
     public function login()
@@ -67,6 +67,12 @@ class UserController extends Controller
             "password" => Hash::make($request->password),
         ]);
 
-        return redirect()->route("login");
+        Auth::attempt([
+            "email" => $request->email,
+            "password" => $request->password,
+        ]);
+        $request->session()->regenerate();
+
+        return redirect()->intended("dashboard");
     }
 }
