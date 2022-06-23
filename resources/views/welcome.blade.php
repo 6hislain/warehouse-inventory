@@ -5,7 +5,7 @@
     <div class="column is-half my-auto">
         <div class="content">
             <h1 class='is-size-1'>Keep a warehouse inventory with ease</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic in, consequuntur animi fugit, dignissimos autem, ipsa numquam cupiditate tenetur alias quae, quasi exercitationem. Ducimus excepturi neque officia temporibus, et minus?</p>
+            <p>This is a demo project, with minimum functionalities. It is build using Laravel 9 and Bulma CSS. It has four tables: user, product, category, and transaction - each user is able to see and manage his or her own content</p>
             <a href="{{ route('about') }}" class="button is-info is-rounded">Learn More</a>
         </div>
     </div>
@@ -17,7 +17,7 @@
     </div>
     <div class="column is-3">
         <div class="box content has-text-centered">
-            <h4>Product</h4>
+            <h4>Manage Products</h4>
             <img src="{{ asset('img/take-notes.svg') }}" alt="Take notes" class='is-fullwidth'>
         </div>
     </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="column is-3">
         <div class="box content has-text-centered">
-            <h4>Category</h4>
+            <h4>Categorize</h4>
             <img src="{{ asset('img/raise-hand.svg') }}" alt="Raise hand" class='is-fullwidth'>
         </div>
     </div>
@@ -38,6 +38,9 @@
             <h4>User Acccess</h4>
             <img src="{{ asset('img/agree.svg') }}" alt="Agree" class='is-fullwidth'>
         </div>
+    </div>
+    <div class="colum is-12 content pt-6 pb-2">
+        <p class='has-text-weight-bold'>&copy; {{ date('Y') }} Warehouse Inventory</p>
     </div>
 </div>
 @endsection

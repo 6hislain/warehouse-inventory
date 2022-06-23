@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Transaction;
@@ -23,6 +24,24 @@ class DefaultController extends Controller
 	public function about()
 	{
 		return view("about");
+	}
+
+	public function stats()
+	{
+		$user_count = User::count();
+		$product_count = Product::count();
+		$category_count = Category::count();
+		$transaction_count = Transaction::count();
+
+		return view(
+			"stats",
+			compact([
+				"user_count",
+				"product_count",
+				"category_count",
+				"transaction_count",
+			])
+		);
 	}
 
 	public function dashboard()

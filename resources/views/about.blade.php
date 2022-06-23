@@ -3,10 +3,12 @@
 @section('title', 'About Us')
 
 @section('content')
-
-<div class="content box">
-	<h1>About - Warehouse Inventory</h1>
-	<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic in, consequuntur animi fugit, dignissimos autem, ipsa numquam cupiditate tenetur alias quae, quasi exercitationem. Ducimus excepturi neque officia temporibus, et minus?</p>
+<div class="columns is-centered">
+    <div class="column is-half">
+        <div class="content box">
+            <h1>About - Warehouse Inventory</h1>
+            <p>Point of sale, enterprice resource management or planning software are essential business software that helps you manage day to day operations within a business. This demo project is built to showcase some of those functionalities.</p>
+        </div>
+    </div>
 </div>
-
 @endsection

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +15,24 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("guest")->except(["settings", "update", "logout"]);
+        $this->middleware("auth")->only(["settings", "update", "logout"]);
+    }
+
+    public function show(User $user)
+    {
+        $product_count = Product::where("user_id", $user->id)->count();
+        $category_count = Category::where("user_id", $user->id)->count();
+        $transaction_count = Transaction::where("user_id", $user->id)->count();
+
+        return view(
+            "user.show",
+            compact([
+                "user",
+                "product_count",
+                "category_count",
+                "transaction_count",
+            ])
+        );
     }
 
     public function authenticate(Request $request)

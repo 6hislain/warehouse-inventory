@@ -15,11 +15,17 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::where("user_id", auth()->user()->id)
+        $transactions = Transaction::latest()
+            ->where("user_id", auth()->user()->id)
             ->with("product")
             ->simplePaginate(10);
 
         return view("transaction.index", compact("transactions"));
+    }
+
+    public function show(Transaction $transaction)
+    {
+        return view("transaction.show", compact("transaction"));
     }
 
     public function create()
@@ -74,6 +80,10 @@ class TransactionController extends Controller
 
     public function destroy(Transaction $transaction)
     {
+        if ($transaction->user_id != auth()->user()->id) {
+            return back();
+        }
+
         $transaction->delete();
 
         return redirect()->route("transaction.index");

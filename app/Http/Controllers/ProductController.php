@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,12 +17,28 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::where(
-            "user_id",
-            auth()->user()->id
-        )->simplePaginate(8);
+        $products = Product::latest()
+            ->where("user_id", auth()->user()->id)
+            ->simplePaginate(8);
 
         return view("product.index", compact("products"));
+    }
+
+    public function show(Product $product)
+    {
+        $transactions = Transaction::latest()
+            ->where("product_id", $product->id)
+            ->simplePaginate(10);
+
+        $transactions_count = Transaction::where(
+            "product_id",
+            $product->id
+        )->count();
+
+        return view(
+            "product.show",
+            compact(["product", "transactions", "transactions_count"])
+        );
     }
 
     public function create()
@@ -71,6 +88,10 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        if ($product->user_id != auth()->user()->id) {
+            return back();
+        }
+
         $request->validate([
             "name" => ["required", "min:3", "max:100", "unique:users"],
             "description" => ["required", "min:3"],
@@ -100,6 +121,10 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if ($product->user_id != auth()->user()->id) {
+            return back();
+        }
+
         Storage::delete($product->image);
         $product->delete();
 
