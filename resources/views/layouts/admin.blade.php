@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', env('APP_NAME'))</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
     @yield('styles')
   </head>
   <body class='has-background-white-ter'>
@@ -58,7 +58,7 @@
         <div class="column">@yield('content')</div>
       </div>
     <main>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
     @yield('scripts')
   </body>
 </html>
