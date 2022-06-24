@@ -5,7 +5,7 @@
     <div class="column is-half my-auto">
         <div class="content">
             <h1 class='is-size-1'>Keep a warehouse inventory with ease</h1>
-            <p>This is a demo project, with minimum functionalities. It is build using Laravel 9 and Bulma CSS. It has four tables: user, product, category, and transaction - each user is able to see and manage his or her own content</p>
+            <p>This is a demo project, with minimum functionalities. It is built using Laravel 9 and Bulma CSS. It has four tables: user, product, category, and transaction - each user is able to see and manage his or her own content</p>
             <a href="{{ route('about') }}" class="button is-info is-rounded">Learn More</a>
         </div>
     </div>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="colum is-12 content pt-6 pb-2">
-        <p class='has-text-weight-bold'>&copy; {{ date('Y') }} Warehouse Inventory</p>
+        <p class='has-text-weight-bold has-text-centered'>&copy; {{ date('Y') }} Warehouse Inventory</p>
     </div>
 </div>
 @endsection

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="columns is-centered">
-	<div class="column is-8">
+  <div class="column is-8">
     <div class="box">
       <div class="table-container">
         <table class="table is-fullwidth is-striped is-hoverable">
@@ -13,7 +13,8 @@
               <td colspan="2" class='has-text-centered'>
                 {{ $user->name }}
                 <figure class="image is-128x128 mx-auto my-2">
-                  <img src="/storage/{{ substr($user->image, 6) }}" alt="{{ $user->name }}">
+                  <img src="https://bulma.io/images/placeholders/128x128.png">
+                  {{-- <img src="/storage/{{ substr($user->image, 6) }}" alt="{{ $user->name }}"> --}}
                 </figure>
               </td>
             </tr>

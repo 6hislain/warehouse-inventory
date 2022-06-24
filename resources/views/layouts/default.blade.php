@@ -79,7 +79,7 @@
     </nav>
 
     <main class='container my-4'>
-      @yield('content')
+      <div class='mx-3'>@yield('content')</div>
     <main>
 
     <script src="{{ secure_asset('js/app.js') }}"></script>

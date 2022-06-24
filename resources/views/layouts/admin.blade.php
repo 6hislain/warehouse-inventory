@@ -14,7 +14,8 @@
           <div class="box">
             @if (auth()->user()->image)
             <figure class="image is-64x64 mx-auto">
-              <img class='is-rounded' src="/storage/{{ substr(auth()->user()->image, 6) }}" alt="{{ auth()->user()->name }}">
+              <img src="https://bulma.io/images/placeholders/64x64.png">
+              {{-- <img class='is-rounded' src="/storage/{{ substr(auth()->user()->image, 6) }}" alt="{{ auth()->user()->name }}"> --}}
             </figure>
             @endif
             <h6 class='has-text-weight-bold has-text-centered mb-2 is-size-6'>{{ auth()->user()->name }}</h6>

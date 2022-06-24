@@ -32,7 +32,8 @@
     <div class="card">
       <div class="card-image">
         <figure class="image is-3by2">
-          <img src="/storage/{{ substr($product->image, 6) }}" alt="Placeholder image">
+          <img src="https://bulma.io/images/placeholders/128x128.png">
+          {{-- <img src="/storage/{{ substr($product->image, 6) }}" alt="{{ $product->name }}"> --}}
         </figure>
       </div>
       <div class="card-content p-3">
