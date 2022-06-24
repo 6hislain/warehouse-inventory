@@ -1,3 +1,5 @@
+![issues](https://img.shields.io/github/issues/6hislain/warehouse-inventory) ![forks](https://img.shields.io/github/forks/6hislain/warehouse-inventory) ![stars](https://img.shields.io/github/stars/6hislain/warehouse-inventory) ![license](https://img.shields.io/github/license/6hislain/warehouse-inventory) ![php](https://img.shields.io/packagist/php-v/laravel/laravel)
+
 # Warehouse Inventory
 
 A (minimal viable product) project for managing stock in a warehouse
