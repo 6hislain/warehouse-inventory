@@ -16,8 +16,7 @@
           <td>
             {{ $product->name }}
             <figure class="image is-128x128">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-              {{-- <img src="/storage/{{ substr($product->image, 6) }}" alt="{{ $product->name }}"> --}}
+              <img src="/storage/{{ substr($product->image, 6) }}" alt="{{ $product->name }}">
             </figure>
           </td>
         </tr>

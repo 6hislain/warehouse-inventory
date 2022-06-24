@@ -14,8 +14,7 @@
                 {{ $user->name }}
                 @if ($user->image)
                 <figure class="image is-128x128 mx-auto my-2">
-                  <img src="https://bulma.io/images/placeholders/128x128.png">
-                  {{-- <img src="/storage/{{ substr($user->image, 6) }}" alt="{{ $user->name }}"> --}}
+                  <img src="/storage/{{ substr($user->image, 6) }}" alt="{{ $user->name }}">
                 </figure>
                 @endif
               </td>
